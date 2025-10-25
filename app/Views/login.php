@@ -137,7 +137,7 @@
 
 <div class="container">
     <div class="left">
-        <img src="<?= base_url('assets/img/logo.png') ?>" alt="Logo DIB">
+        <img src="/assets/img/logo.png" alt="Logo">
     </div>
 
     <div class="right">
