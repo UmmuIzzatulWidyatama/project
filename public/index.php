@@ -35,6 +35,16 @@ require FCPATH . '../app/Config/Paths.php';
 // ^^^ Change this line if you move your application folder
 
 $paths = new Config\Paths();
+// --- Vercel writable hotfix: gunakan /tmp sebagai WRITEPATH ---
+$customWritable = getenv('CI_WRITABLE') ?: '/tmp/ci4';
+$paths->writableDirectory = $customWritable;
+
+// Buat folder yang dibutuhkan CI4 (cache, session, logs)
+@is_dir($customWritable) || @mkdir($customWritable, 0777, true);
+@is_dir($customWritable . '/cache')   || @mkdir($customWritable . '/cache',   0777, true);
+@is_dir($customWritable . '/session') || @mkdir($customWritable . '/session', 0777, true);
+@is_dir($customWritable . '/logs')    || @mkdir($customWritable . '/logs',    0777, true);
+
 
 // Location of the framework bootstrap file.
 require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'bootstrap.php';
