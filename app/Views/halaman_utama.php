@@ -85,17 +85,32 @@
 </div>
 
 <script>
-  const apiUrl = "<?= rtrim(site_url('api/summary'), '/') ?>";
+  // Helper redirect bila 401
+  function handleUnauthorized(res) {
+    if (res.status === 401) {
+      // balik ke login jika sesi tidak valid
+      window.location.href = '<?= site_url('login') ?>';
+      return true;
+    }
+    return false;
+  }
+
+  const apiSummary = "<?= rtrim(site_url('api/summary'), '/') ?>";
   const el = id => document.getElementById(id);
   const nInt = x => (x==null||x==='') ? '–'
                  : new Intl.NumberFormat('id-ID', {maximumFractionDigits:0}).format(Number(x));
 
   (async () => {
     try{
-      const res = await fetch(apiUrl, { headers:{'Accept':'application/json'} });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const j = await res.json();
+      const res = await fetch(apiSummary, {
+        headers: { 'Accept':'application/json' },
+        credentials: 'include' // <-- penting: kirim cookie sesi
+      });
 
+      if (handleUnauthorized(res)) return;
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+
+      const j = await res.json();
       el('v_trx').textContent      = nInt(j?.data?.jumlahDataTransaksi);
       el('v_analisis').textContent = nInt(j?.data?.jumlahDataAnalisis);
 
@@ -117,8 +132,14 @@
 
   async function renderTopProductsPie(){
     try{
-      const r = await fetch(apiTop, { headers:{'Accept':'application/json'} });
+      const r = await fetch(apiTop, {
+        headers: { 'Accept':'application/json' },
+        credentials: 'include' // <-- penting: kirim cookie sesi
+      });
+
+      if (handleUnauthorized(r)) return;
       if (!r.ok) throw new Error('HTTP ' + r.status);
+
       const j = await r.json();
       const rows = Array.isArray(j?.data) ? j.data : [];
 
