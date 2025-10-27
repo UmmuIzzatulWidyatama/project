@@ -85,16 +85,6 @@
 </div>
 
 <script>
-  // Helper redirect bila 401
-  function handleUnauthorized(res) {
-    if (res.status === 401) {
-      // balik ke login jika sesi tidak valid
-      window.location.href = '<?= site_url('login') ?>';
-      return true;
-    }
-    return false;
-  }
-
   const apiSummary = "<?= rtrim(site_url('api/summary'), '/') ?>";
   const el = id => document.getElementById(id);
   const nInt = x => (x==null||x==='') ? '–'
@@ -107,7 +97,6 @@
         credentials: 'include' // <-- penting: kirim cookie sesi
       });
 
-      if (handleUnauthorized(res)) return;
       if (!res.ok) throw new Error('HTTP ' + res.status);
 
       const j = await res.json();
@@ -137,7 +126,6 @@
         credentials: 'include' // <-- penting: kirim cookie sesi
       });
 
-      if (handleUnauthorized(r)) return;
       if (!r.ok) throw new Error('HTTP ' + r.status);
 
       const j = await r.json();
