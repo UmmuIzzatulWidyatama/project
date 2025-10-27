@@ -7,6 +7,7 @@ $routes->get('/', 'AuthController::loginView', ['namespace' => 'App\Controllers\
 $routes->get('login', 'AuthController::loginView', ['namespace' => 'App\Controllers\Api']);
 $routes->post('api/login', 'AuthController::login', ['namespace' => 'App\Controllers\Api']);
 $routes->get('health/db', 'Health::db');
+$routes->get('health/session', 'Health::session');
 
 // Protected (with auth filter)
 $routes->group('', ['namespace' => 'App\Controllers\Api', 'filter' => 'auth'], function($routes) {
