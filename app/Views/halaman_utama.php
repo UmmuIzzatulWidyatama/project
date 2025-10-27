@@ -43,7 +43,7 @@
             Analisis transaksi untuk menemukan pasangan produk yang sering dibeli bersama
             agar promosi, bundling, dan penempatan produk lebih tepat sasaran.
           </p>
-          <a href="http://localhost:8080/apriori" class="btn btn-primary btn-sm">
+          <a href="<?= site_url('apriori') ?>" class="btn btn-primary btn-sm">
             Buat Analisis
           </a>
         </div>
@@ -72,7 +72,7 @@
               <p class="mb-3 text-muted">
                 Produk yang paling sering dibeli bersama dengan produk lainnya pada semua hasil analisis.
               </p>
-              <a href="http://localhost:8080/report" class="btn btn-outline-primary btn-sm">
+              <a href="<?= site_url('report') ?>" class="btn btn-outline-primary btn-sm">
                 Lihat hasil analisis
               </a>
             </div>

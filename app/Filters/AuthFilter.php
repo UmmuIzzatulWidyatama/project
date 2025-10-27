@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Filters;
 
 use CodeIgniter\HTTP\RequestInterface;
@@ -11,22 +10,26 @@ class AuthFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        $session = session();
-        if ($session->get('user_id')) {
+        $s = session();
+
+        // sesuaikan dengan kunci yang kamu set saat login
+        if ($s->get('isLoggedIn') === true && $s->get('user')) {
             return; // sudah login
         }
 
-        // Jika request minta JSON / Ajax, balas 401 JSON
-        $accept = $request->getHeaderLine('Accept');
-        if ($request->isAJAX() || stripos($accept, 'application/json') !== false) {
+        // request API → balas 401 JSON
+        $isApi  = str_starts_with($request->getPath(), 'api/')
+               || stripos($request->getHeaderLine('Accept'), 'application/json') !== false
+               || $request->isAJAX();
+
+        if ($isApi) {
             return Services::response()
                 ->setJSON(['message' => 'Unauthorized'])
                 ->setStatusCode(401);
         }
 
-        // Selain itu, redirect ke halaman login
-        return redirect()->to(site_url('login'))
-            ->with('error', 'Silakan login terlebih dahulu.');
+        // request halaman → redirect ke login
+        return redirect()->to(site_url('login'));
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null) {}

@@ -19,10 +19,6 @@ class HomeController extends BaseController
 
     public function summary()
     {
-        if (! session()->get('isLoggedIn')) {
-            return $this->response->setJSON(['message'=>'Unauthorized'])->setStatusCode(401);
-        }
-
         $mTx  = new TransactionModel();
         $mAna = new AnalisisDataModel();
 
@@ -41,10 +37,6 @@ class HomeController extends BaseController
 
     public function topProducts()
     {
-        if (! session()->get('isLoggedIn')) {
-            return $this->response->setJSON(['message'=>'Unauthorized'])->setStatusCode(401);
-        }
-        
         $limit = (int) ($this->request->getGet('limit') ?? 3);
         if ($limit <= 0) $limit = 3;
 

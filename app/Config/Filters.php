@@ -20,7 +20,7 @@ class Filters extends BaseConfig
      */
     public array $aliases = [
         'cors' => \App\Filters\Cors::class,
-        'csrf'          => CSRF::class,
+        'csrf' => \CodeIgniter\Filters\CSRF::class,
         'toolbar'       => DebugToolbar::class,
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
