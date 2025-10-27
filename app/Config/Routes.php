@@ -6,6 +6,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'AuthController::loginView', ['namespace' => 'App\Controllers\Api']);
 $routes->get('login', 'AuthController::loginView', ['namespace' => 'App\Controllers\Api']);
 $routes->post('api/login', 'AuthController::login', ['namespace' => 'App\Controllers\Api']);
+$routes->get('health/db', 'Health::db');
 
 // Protected (with auth filter)
 $routes->group('', ['namespace' => 'App\Controllers\Api', 'filter' => 'auth'], function($routes) {
