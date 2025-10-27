@@ -41,9 +41,14 @@ class AuthController extends BaseController
 
         // ===== gunakan helper session() (BUKAN $this->session)
         $session = session();
+        $session->regenerate(); // anti session fixation
         $session->set([
-            'user_id'  => (int)$user['id'],
-            'username' => $user['username']
+        'isLoggedIn' => true,
+        'user'       => [
+            'id'       => $user['id'],
+            'username' => $user['username'],
+            // tambahkan field lain yang kamu butuh
+        ],
         ]);
 
         return $this->respond([

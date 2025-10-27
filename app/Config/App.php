@@ -17,6 +17,18 @@ class App extends BaseConfig
      * E.g., http://example.com/
      */
     public string $baseURL = 'https://project-theta-five-39.vercel.app/';
+    public string $sessionDriver     = 'CodeIgniter\Session\Handlers\DatabaseHandler';
+    public string $sessionSavePath   = 'ci_sessions';   // nama tabel di atas
+    public string $sessionCookieName = 'ci_session';
+    public int    $sessionExpiration = 7200;
+    public bool   $sessionMatchIP    = false;
+
+    public string $cookieDomain   = '';   // biarkan kosong
+    public string $cookiePath     = '/';
+    public bool   $cookieSecure   = true; // Vercel = HTTPS
+    public bool   $cookieHTTPOnly = true;
+    public string $cookieSameSite = 'None'; // ubah ke 'None' hanya jika benar2 cross-site
+
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.

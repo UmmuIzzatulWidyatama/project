@@ -173,6 +173,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
   try {
     const response = await fetch('<?= site_url('api/login') ?>', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest'

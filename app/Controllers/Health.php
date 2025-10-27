@@ -15,4 +15,14 @@ class Health extends Controller {
       ])->setStatusCode(500);
     }
   }
+  
+  public function session()
+  {
+    return $this->response->setJSON([
+      'id'         => session_id(),
+      'isLoggedIn' => session()->get('isLoggedIn'),
+      'user'       => session()->get('user'),
+    ]);
+  }
+
 }

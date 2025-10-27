@@ -158,6 +158,7 @@
     try{
       const res = await fetch(apiUpload, {
         method: 'POST',
+        credentials: 'include',
         body: fd,
         headers: { 'X-Requested-With': 'XMLHttpRequest' }
       });
@@ -208,6 +209,7 @@
     try {
       const res = await fetch(apiSave, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
           'X-Requested-With': 'XMLHttpRequest'

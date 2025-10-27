@@ -103,6 +103,7 @@ document.getElementById('aprioriForm').addEventListener('submit', async (e) => {
   try {
     const res  = await fetch(apiRun, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
