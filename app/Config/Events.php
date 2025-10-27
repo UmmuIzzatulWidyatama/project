@@ -24,6 +24,9 @@ use CodeIgniter\HotReloader\HotReloader;
  */
 
 Events::on('pre_system', static function () {
+    // inisialisasi sesi di awal siklus hidup request
+    service('session')->start();
+    
     if (ENVIRONMENT !== 'testing') {
         if (ini_get('zlib.output_compression')) {
             throw FrameworkException::forEnabledZlibOutputCompression();

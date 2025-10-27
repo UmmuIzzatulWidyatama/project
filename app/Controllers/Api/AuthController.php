@@ -47,7 +47,6 @@ class AuthController extends BaseController
         'user'       => [
             'id'       => $user['id'],
             'username' => $user['username'],
-            // tambahkan field lain yang kamu butuh
         ],
         ]);
 
