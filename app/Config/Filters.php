@@ -19,6 +19,7 @@ class Filters extends BaseConfig
      *                                                     or [filter_name => [classname1, classname2, ...]]
      */
     public array $aliases = [
+        'cors' => \App\Filters\Cors::class,
         'csrf'          => CSRF::class,
         'toolbar'       => DebugToolbar::class,
         'honeypot'      => Honeypot::class,
@@ -39,6 +40,7 @@ class Filters extends BaseConfig
             // 'csrf',
             // 'invalidchars',
             'csrf' => ['except' => ['api/*']],
+            'cors'
         ],
         'after' => [
             'toolbar',
